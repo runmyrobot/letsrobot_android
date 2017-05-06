@@ -74,17 +74,19 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     robot_menu();
                 } catch (Exception e) {
-                    TextView errorview = (TextView) findViewById(R.id.errorView);
+                    TextView errorview = (TextView) findViewById(R.id.robotName);
                     errorview.setText(e.toString());
                     return;
                 }
             }
         });
-    controlRobot(robotid);
+    controlRobot(robotid,"Default");
     }
 
-    public void controlRobot(final String contolrobotid) {
+    public void controlRobot(final String contolrobotid, final String Name) {
+        TextView TVName = (TextView) findViewById(R.id.robotName);
         WebView Videoview = (WebView) findViewById(R.id.Video);
+        TVName.setText(Name);
         Videoview.loadUrl("http://runmyrobot.com/fullview/" +  contolrobotid);
         //move forward
         Button forwardbtn = (Button) findViewById(R.id.btnForward);
@@ -297,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
         Button backbtn = (Button) findViewById(R.id.btnback);
         Button forwardbtn = (Button) findViewById(R.id.btnForward);
         Button changeRobot = (Button) findViewById(R.id.changeRobot);
+        TextView Name = (TextView) findViewById(R.id.robotName);
 
         Videoview.setVisibility(View.VISIBLE);
         rightbtn.setVisibility(View.VISIBLE);
@@ -304,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
         backbtn.setVisibility(View.VISIBLE);
         forwardbtn.setVisibility(View.VISIBLE);
         changeRobot.setVisibility(View.VISIBLE);
+        Name.setVisibility(View.VISIBLE);
 
         Spinner dropdown = (Spinner) findViewById(R.id.robot_spinner);
         ImageView robotImage = (ImageView) findViewById(R.id.robotImage);
@@ -324,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         Button backbtn = (Button) findViewById(R.id.btnback);
         Button forwardbtn = (Button) findViewById(R.id.btnForward);
         Button changeRobot = (Button) findViewById(R.id.changeRobot);
+        TextView Name = (TextView) findViewById(R.id.robotName);
 
         Videoview.setVisibility(View.INVISIBLE);
         rightbtn.setVisibility(View.INVISIBLE);
@@ -331,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
         backbtn.setVisibility(View.INVISIBLE);
         forwardbtn.setVisibility(View.INVISIBLE);
         changeRobot.setVisibility(View.INVISIBLE);
+        Name.setVisibility(View.INVISIBLE);
 
         final Spinner dropdown = (Spinner) findViewById(R.id.robot_spinner);
         ImageView robotImage = (ImageView) findViewById(R.id.robotImage);
@@ -365,10 +371,11 @@ public class MainActivity extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 String spinnerValue = dropdown.getSelectedItem().toString();
+
                 try {
                     String selectedID = getIdWithName(spinnerValue, robots);
                     robotid = selectedID;
-                    controlRobot(selectedID);
+                    controlRobot(selectedID, spinnerValue);
                     new setImage().execute("http://runmyrobot.com/images/thumbnails/" + selectedID + ".jpg");
                 } catch (Exception e) {
                     return;

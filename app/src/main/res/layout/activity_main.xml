@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/errorView"
+        android:id="@+id/robotName"
         android:layout_width="154dp"
         android:layout_height="31dp"
         android:layout_marginRight="8dp"
@@ -86,7 +86,7 @@
         android:layout_y="178dp"
         android:text="test"
         android:textAlignment="textEnd"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         android:visibility="visible"
         app:layout_constraintRight_toRightOf="parent"
