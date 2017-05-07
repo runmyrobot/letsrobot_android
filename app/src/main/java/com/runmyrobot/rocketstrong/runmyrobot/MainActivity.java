@@ -39,6 +39,8 @@ import io.socket.client.Socket;
 
 public class MainActivity extends AppCompatActivity {
     public static String robotid = "48853711";
+    public static String sesionId = "";
+    public static String currentrobotName = "";
     private Socket mSocket;
 
     {
@@ -62,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
+        try {
+            JSONObject FirstParams = readJsonFromUrl("https://runmyrobot.com/internal/");
+            JSONObject firstrobot = FirstParams.getJSONObject("robot");
+            sesionId = firstrobot.getString("_id");
+            robotid = firstrobot.getString("robot_id");
+            currentrobotName = firstrobot.getString("robot_name");
+        } catch (Exception e) {
+            return;
+        }
 
         Videoview.loadUrl("http://runmyrobot.com/fullview/" + robotid);
 
@@ -80,12 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    controlRobot(robotid,"Default");
+    controlRobot(robotid,currentrobotName,sesionId);
     }
 
-    public void controlRobot(final String contolrobotid, final String Name) {
+    public void controlRobot(final String contolrobotid, final String Name, final String sesid) {
         TextView TVName = (TextView) findViewById(R.id.robotName);
         WebView Videoview = (WebView) findViewById(R.id.Video);
+        robotid = contolrobotid;
         TVName.setText(Name);
         Videoview.loadUrl("http://runmyrobot.com/fullview/" +  contolrobotid);
         //move forward
@@ -115,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         JSONObject forward = new JSONObject();
+                        forward.put("_id", sesid);
                         forward.put("robot_id", contolrobotid);
+                        forward.put("robot_name", Name);
                         forward.put("command", "F");
                         forward.put("user", "wipApp");
                         mSocket.emit("command_to_robot", forward);
@@ -155,7 +169,9 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         JSONObject back = new JSONObject();
+                        back.put("_id", sesid);
                         back.put("robot_id", contolrobotid);
+                        back.put("robot_name", Name);
                         back.put("command", "B");
                         back.put("user", "wipApp");
                         mSocket.emit("command_to_robot", back);
@@ -195,7 +211,9 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         JSONObject left = new JSONObject();
+                        left.put("_id", sesid);
                         left.put("robot_id", contolrobotid);
+                        left.put("robot_name", Name);
                         left.put("command", "L");
                         left.put("user", "wipApp");
                         mSocket.emit("command_to_robot", left);
@@ -235,7 +253,9 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         JSONObject right = new JSONObject();
+                        right.put("_id", sesid);
                         right.put("robot_id", contolrobotid);
+                        right.put("robot_name", Name);
                         right.put("command", "R");
                         right.put("user", "wipApp");
                         mSocket.emit("command_to_robot", right);
@@ -349,7 +369,9 @@ public class MainActivity extends AppCompatActivity {
         setupRobot.setVisibility(View.VISIBLE);
 
         //setContentView(R.layout.select_robot);
-        JSONObject json = readJsonFromUrl("https://runmyrobot.com/internal");
+        JSONObject json = readJsonFromUrl("https://runmyrobot.com/internal/robot/" + robotid);
+        JSONObject selectedrobot = json.getJSONObject("robot");
+        sesionId = selectedrobot.getString("_id");
         final JSONArray robots = json.getJSONArray("robots");
         List<String> items = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -374,8 +396,8 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     String selectedID = getIdWithName(spinnerValue, robots);
-                    robotid = selectedID;
-                    controlRobot(selectedID, spinnerValue);
+                    currentrobotName = spinnerValue;
+                    controlRobot(selectedID, spinnerValue, sesionId);
                     new setImage().execute("http://runmyrobot.com/images/thumbnails/" + selectedID + ".jpg");
                 } catch (Exception e) {
                     return;
