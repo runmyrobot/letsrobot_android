@@ -8,8 +8,8 @@
 
     <WebView
         android:id="@+id/Video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -22,9 +22,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
 
     </WebView>
+
+    <TextView
+        android:id="@+id/robotName"
+        android:layout_width="154dp"
+        android:layout_height="31dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_x="1658dp"
+        android:layout_y="178dp"
+        android:text="test"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text=" "
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/setupRobot"
@@ -36,25 +56,26 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="798dp"
-        tools:layout_editor_absoluteY="445dp" />
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="335dp"
-        android:layout_height="253dp"
+        android:layout_width="134dp"
+        android:layout_height="242dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="18dp"
         android:text="No Description"
         android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/robotImage"
-        app:layout_constraintTop_toBottomOf="@+id/robot_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/robot_spinner"
+        android:layout_marginStart="18dp" />
 
     <ImageView
         android:id="@+id/robotImage"
-        android:layout_width="348dp"
-        android:layout_height="307dp"
+        android:layout_width="246dp"
+        android:layout_height="256dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/robotImagedesc"
         android:visibility="invisible"
@@ -74,25 +95,9 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/robotName"
-        android:layout_width="154dp"
-        android:layout_height="31dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_x="1658dp"
-        android:layout_y="178dp"
-        android:text="test"
-        android:textAlignment="textEnd"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:visibility="visible"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="798dp"
-        tools:text=" " />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/changeRobot"
@@ -104,14 +109,15 @@
         android:layout_y="138dp"
         android:text="Select Roobot"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp" />
 
     <Button
         android:id="@+id/btnForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="106dp"
-        android:layout_marginRight="96dp"
+        android:layout_marginRight="97dp"
         android:text="Forward"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

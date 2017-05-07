@@ -64,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
+        webSettings.setPluginState(WebSettings.PluginState.ON);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+        //webSettings.setMixedContentMode(webSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         try {
             JSONObject FirstParams = readJsonFromUrl("https://runmyrobot.com/internal/");
             JSONObject firstrobot = FirstParams.getJSONObject("robot");
