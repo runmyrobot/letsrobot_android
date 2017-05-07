@@ -2,5 +2,5 @@
 in development prototype app for letsRobot
 # Building
 build using android studio
-#Notes
+# Notes
 android 5.0 and up
